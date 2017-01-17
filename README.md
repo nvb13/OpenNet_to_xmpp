@@ -10,7 +10,8 @@ gpg --import key_file.asc
 
 #Register Jabber bot
 
-#Open opennet_xmpp.sh and edit vars, as Loin/pass/server/pgp_key and etc.
+#Edit vars
+Open opennet_xmpp.sh and edit vars, as Loin/pass/server/pgp_key and etc.
 
 #Add script to cron.
 crontab -e
