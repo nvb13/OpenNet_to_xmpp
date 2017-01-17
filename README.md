@@ -1,5 +1,7 @@
 # OpenNet_to_xmpp
 OpenNet News XMPP Encrypted Gateway
+Get news from http://opennet.ru encrypt it with OpenPGP and send to Jabber.
+You must have jabber client wuth OpenPGP support.
 
 #INSTALL
 apt-get install sendxmpp sqlite3 curl
