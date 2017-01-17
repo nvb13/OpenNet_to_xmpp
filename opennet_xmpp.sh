@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #################################
-#				                        #
-#	      Opennet.ru Jabber	      #
-#	         News Grubber		      #
-#			                        	#
+#				#
+#	Opennet.ru Jabber	#
+#	   News Grubber		#
+#				#
 #################################
 
 ### Login/Pass/Server of bot ####
