@@ -4,7 +4,7 @@ Get news from http://opennet.ru encrypt it with OpenPGP and send to Jabber.
 You must have jabber client wuth OpenPGP support.
 
 #INSTALL
-apt-get install sendxmpp sqlite3 curl
+apt-get install sendxmpp sqlite3 curl          
 chmod +x opennet_xmpp.sh
 
 #Import PGP key
