@@ -4,8 +4,8 @@
 # Установка
 Для работы скрипта требуются sendxmpp, sqlite3, curl
 
-apt-get install sendxmpp sqlite3 curl
-git clone https://github.com/nvb13/OpenNet_to_xmpp.git             
+apt-get install sendxmpp sqlite3 curl               
+git clone https://github.com/nvb13/OpenNet_to_xmpp.git               
 cd OpenNet_to_xmpp/               
 chmod +x opennet_xmpp.sh          
 
