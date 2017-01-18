@@ -50,7 +50,7 @@ while read line
 		if [ "$Crypt" == 1 ]; then
                   msg=$(echo "$line" | gpg -e -r "$Key_Name" --armor | grep -v 'PGP MESSAGE' | grep -v '^$')
                   msg_tmp="/tmp/$(( ( RANDOM % 25400 )  + 1 ))"
-		  
+
                   echo "<message to='$Send_to' from='$Jid@$JServer' type='chat'>" >> $msg_tmp
                   echo "<body>This message is encrypted.</body>" >> $msg_tmp
                   echo "<x xmlns='jabber:x:encrypted'>$msg</x>" >> $msg_tmp
