@@ -18,6 +18,7 @@ JServer="" # Exapmle.com
 ### Jid/PGP key of recipient ####
 
 Send_to=""  # Jid: test@example.com
+Crypt="1"   # Encrypt with OpenPGP or not: 1,0
 Key_Name="" # PGP key name: my_key
 
 #################################
@@ -30,9 +31,7 @@ $sqlite3 $DB_FILE  "
 
         create table IF NOT EXISTS  news (
 		id integer primary key autoincrement,
-                News TEXT UNIQUE,
-		Date DATETIME,
-		Time DATETIME);"
+                News TEXT UNIQUE,);"
 
 # Get news from Opennet.ru, and remove trash
 curl -s  https://www.opennet.ru/opennews/ | iconv -f koi8-r | grep -a  title2 \
@@ -44,24 +43,27 @@ curl -s  https://www.opennet.ru/opennews/ | iconv -f koi8-r | grep -a  title2 \
 # Wrirt news to database
 while read line
  do
-	$sqlite3 $DB_FILE  " insert into news (News,Date,Time) values  ('""$line""', strftime('%Y-%m-%d'), strftime('%H:%M:%S') )"
+	$sqlite3 $DB_FILE  "insert into news (News) values  ('""$line""')"
 
 	if [ $? == "0" ];then # If news not in database, encrypt it and send it to recipient
 
-		msg=$(echo "$line" | gpg -e -r "$Key_Name" --armor | grep -v 'PGP MESSAGE' | grep -v '^$')
+		if [ "$Crypt" == 1 ]; then
+                  msg=$(echo "$line" | gpg -e -r "$Key_Name" --armor | grep -v 'PGP MESSAGE' | grep -v '^$')
+                  msg_tmp="/tmp/$(( ( RANDOM % 25400 )  + 1 ))"
+		  
+                  echo "<message to='$Send_to' from='$Jid@$JServer' type='chat'>" >> $msg_tmp
+                  echo "<body>This message is encrypted.</body>" >> $msg_tmp
+                  echo "<x xmlns='jabber:x:encrypted'>$msg</x>" >> $msg_tmp
+                  echo "</message>" >> $msg_tmp
 
-		msg_tmp="/tmp/$(( ( RANDOM % 25400 )  + 1 ))"
-		rm -rf $msg_tmp
-		echo "<message to='$Send_to' from='$Jid@$JServer' type='chat'>" >> $msg_tmp
-		echo "<body>This message is encrypted.</body>" >> $msg_tmp
-		echo "<x xmlns='jabber:x:encrypted'>$msg</x>" >> $msg_tmp
-		echo "</message>" >> $msg_tmp
-
-		cat $msg_tmp | sendxmpp -v -u "$Jid" -p "$Pass" -j "$JServer" -t --raw
+                  cat $msg_tmp | sendxmpp -v -u "$Jid" -p "$Pass" -j "$JServer" -t --raw
+                else #Send not encrypted message
+                  echo "$line"  | sendxmpp -v -u "$Jid" -p "$Pass" -j "$JServer" -e -t "$Send_to"
+                fi
 	fi
-
+  sleep 2
  done < "/tmp/opennet_temp.txt"
 
-rm -rf /tmp/opennet_temp.txt
+rm -rf /tmp/opennet_temp.txt "$msg_tmp"
 
 exit 0;
