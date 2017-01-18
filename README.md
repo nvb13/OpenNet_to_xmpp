@@ -13,14 +13,14 @@ chmod +x opennet_xmpp.sh
 Зарегистрируйте Jabber аккаунт бота на любом сервере.
 Заполните поля в файле opennet_xmpp.sh
 
-Jid=""     # Логин бота без собаки и хоста.
-Pass=""    # Пароль бота
-JServer="" # Сервер бота
-Send_to=""  # Jabber ID получателя куда будут приходить новости test@example.com
-Crypt="1"   # Шифровать сообщения с OpenPGP или нет. Значения 1 или 0
-Key_Name="" # Имя вашего PGP ключа. Например my_key
+Jid=""     # Логин бота без собаки и хоста.     			
+Pass=""    # Пароль бота							
+JServer="" # Сервер бота						
+Send_to=""  # Jabber ID получателя куда будут приходить новости test@example.com			
+Crypt="1"   # Шифровать сообщения с OpenPGP или нет. Значения 1 или 0				
+Key_Name="" # Имя вашего PGP ключа. Например my_key			
 
-Если используете шифрование, то импортируйте публичный ключ получателя.
+Если используете шифрование, то импортируйте публичный ключ получателя.   
 gpg --import key_file.asc где key_file.asc файл публичного ключа получателя
 
 Проверьте работу скрипта ./opennet_xmpp.sh
@@ -29,7 +29,7 @@ gpg --import key_file.asc где key_file.asc файл публичного кл
 crontab -e
 */30 * * * * /home/username/OpenNet_to_xmpp/opennet_xmpp.sh
 
-# Автор nvb13
+Автор nvb13
 
 # ENGLISH
 OpenNet News XMPP Encrypted Gateway
