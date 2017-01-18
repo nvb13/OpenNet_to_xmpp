@@ -30,8 +30,8 @@ DB_FILE=./opennet_db.db
 $sqlite3 $DB_FILE  "
 
         create table IF NOT EXISTS  news (
-		id integer primary key autoincrement,
-                News TEXT UNIQUE,);"
+	   id integer primary key autoincrement,
+           News TEXT UNIQUE,);"
 
 # Get news from Opennet.ru, and remove trash
 curl -s  https://www.opennet.ru/opennews/ | iconv -f koi8-r | grep -a  title2 \
