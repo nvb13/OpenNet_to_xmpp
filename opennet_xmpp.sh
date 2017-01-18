@@ -56,9 +56,9 @@ while read line
                   echo "<x xmlns='jabber:x:encrypted'>$msg</x>" >> $msg_tmp
                   echo "</message>" >> $msg_tmp
 
-                  cat $msg_tmp | sendxmpp -v -u "$Jid" -p "$Pass" -j "$JServer" -t --raw
+                  cat $msg_tmp | sendxmpp -u "$Jid" -p "$Pass" -j "$JServer" -t --raw
                 else #Send not encrypted message
-                  echo "$line"  | sendxmpp -v -u "$Jid" -p "$Pass" -j "$JServer" -e -t "$Send_to"
+                  echo "$line"  | sendxmpp -u "$Jid" -p "$Pass" -j "$JServer" -e -t "$Send_to"
                 fi
 	fi
   sleep 2
