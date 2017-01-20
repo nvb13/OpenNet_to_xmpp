@@ -34,10 +34,9 @@ $sqlite3 $DB_FILE  "
            News TEXT UNIQUE,);"
 
 # Get news from Opennet.ru, and remove trash
-curl -s  https://www.opennet.ru/opennews/ | iconv -f koi8-r | grep -a  title2 \
-| cut -d '>' -f 2,3 | cut -d '"' -f 2,3 \
-| sed 's/"//g' | sed 's/class=title2>//g'\
-| sed 's/<\/a//g' | sed 's/^/http:\/\/opennet.ru/g' > /tmp/opennet_temp.txt
+curl -s http://www.opennet.ru/opennews/opennews_3.txt | iconv -f koi8-r \
+| cut -d '<' -f 8 | cut -d '"' -f 2,3 | sed 's/"//g' | sed 's/>/ /g' \
+| sed 's/\([а-я]*\) \([а-я]*\)/\2 \1/'  > /tmp/opennet_temp.txt
 
 
 # Wrirt news to database
