@@ -35,8 +35,7 @@ $sqlite3 $DB_FILE  "
 
 # Get news from Opennet.ru, and remove trash
 curl -s http://www.opennet.ru/opennews/opennews_3.txt | iconv -f koi8-r \
-| cut -d '<' -f 8 | cut -d '"' -f 2,3 | sed 's/"//g' | sed 's/>/ /g' \
-| sed 's/\([а-я]*\) \([а-я]*\)/\2 \1/'  > /tmp/opennet_temp.txt
+| cut -d '<' -f 8 | cut -d '"' -f 2,3 | sed 's/"//g' | sed 's/>/ /g' > /tmp/opennet_temp.txt
 
 
 # Wrirt news to database
