@@ -31,7 +31,7 @@ $sqlite3 $DB_FILE  "
 
         create table IF NOT EXISTS  news (
 	   id integer primary key autoincrement,
-           News TEXT UNIQUE,);"
+           News TEXT UNIQUE);"
 
 # Get news from Opennet.ru, and remove trash
 curl -s http://www.opennet.ru/opennews/opennews_3.txt | iconv -f koi8-r \
